@@ -1,3 +1,24 @@
+# API Rest CRUD :  Faire un serveur HTTP qui sert les données d'une base de données.
+- **API** : Programme qui fait l'interface entre 2 programmes.
+- **API REST** : Serveur HTTP qui fait l'interface entre le front end et des données. Grossièrement, l'API REST, c'est le back end. Ce serveur permet l'accès Oboney via des URL appelée routes. 
+- **CRUD** : Create Read update Delete. Les routes minimales d'une API REST. Grossièrement si le serveur sert des produits par exemple, je dois faire le CRUD des produits et donc créer les fonctions qui me permettent de Créer, Lire, mettre à jour ou supprimer des produits. 
+
+
+1. Créer une base de données 
+
+2. Faire le CRUD du produit (Créer les fonctions qui permettent d'accéder aux produits contenus dans la base de données).
+    - getAllProducts()
+    - newProduct(title,price)
+
+3. Créer les routes de l'api REST (Créez les URL qui Qui utilise les fonctions pour accéder à la base de données et renvoyer dans la Réponse HTTP, les données soient les produits. )
+    - GET /all-products : Renvoi un tableau de produits 
+    - POST /create-product : Renvoi le produit nouvellement créé.
+
+## Pré-requis 
+
+```bash
+sudo apt install node npm
+```
 
 # Créer la BDD
 
@@ -13,9 +34,15 @@ docker run --name bdd-shop --network local -d -p 3306:3306 -e MYSQL_ROOT_PASSWOR
 docker run --name pma  --network local -d -p 8080:80 -e MYSQL_ROOT_PASSWORD=root -e PMA_HOST=bdd-shop phpmyadmin
 ```
 
-Ecrivez les identifiants :
+Rendez-vous sur php myadmin : http://localhost:8080
+
+![alt text](image-2.png)
+
+
+Et Ecrivez les identifiants :
 root
 root
+
 
 # Créer le projet
 
