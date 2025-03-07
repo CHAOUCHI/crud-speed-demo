@@ -47,13 +47,20 @@ root
 # Créer le projet
 
 ## Init les fichiers du projet
-*database.js*
 ```bash
 npm init
 npm install express mysql2 sequelize cors
 ```
 
+> Dans package.json ajoutez la ligne 
+> `"type":"module",`
+> dans l'objet
+
 ## Se connecter à la BDD en JS
+
+Créez deux fichier database.js et main.js.
+
+*database.js*
 ```js
 import { Sequelize } from "sequelize";
 
@@ -73,6 +80,12 @@ export  const sequelize = new Sequelize(login.database,login.username,login.pass
 ```js
 import { sequelize } from "./database.js";
 sequelize.sync({force : true}); // Se connecter à la BDD
+```
+
+Lancer le programme.
+
+```bash
+node main.js
 ```
 
 Vous voyez, il fait une requete par défaut pour voir si tout va bien.
