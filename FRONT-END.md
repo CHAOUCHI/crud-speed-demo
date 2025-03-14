@@ -80,7 +80,7 @@ La fonction `fetch()` est faite pour ça.
 
 async function main(){
     // Je fais une requete HTTP
-    const response = await fetch("http://localhost/all-product");
+    const response = await fetch("http://localhost:3000/all-product");
 
     // Je converti le body JSON de la réponse en un tableau de produit (le même que j'ai envoyé dans le back)
     const products = await response.json();
@@ -317,10 +317,18 @@ async function addProduct(nouveauProduit){
     };
 
     // Je fais une requete HTTP
-    fetch("http://localhost/create-product",options).then(response=>{
+    fetch("http://localhost:3000/create-product",options).then(response=>{
         console.log("Produit ajouté !");
     });
 }
 ```
 
-4. Vérifiez dans PHPMyAdmin si les produit sont ajouté au clic sur le formulaire.
+4. Vérifiez dans PHPMyAdmin si les produit sont ajoutés au clique sur le formulaire.
+
+## Afficher les produits
+
+Pour afficher les produits il suffit de créer une fonction printAllProducts et de l'appeller :
+- au début de main(), au chargement de la page
+- après addProduct, à chaque nouveau produit ajouté.
+
+Ajoutez la fonction printAllProducts()
