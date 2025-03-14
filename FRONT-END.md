@@ -184,3 +184,143 @@ main();
 
 ## Encapsuler addProduct
 
+Il est d'usage d'encapsuler les `fetch` dans des fonctions pour simplifier la lecture du code.
+
+```js
+async function main(){
+
+    const nouveauProduit = {
+        title : "Airmax",
+        price : 60
+    };
+
+    // j'ajoute mon produit ! 
+    addProduct(nouveauProduit);
+}
+
+main();
+
+// Ajoute un produit dans la BDD
+async function addProduct(nouveauProduit){
+    // Je crée mon header
+    const headers = new Headers();
+    headers.append("Content-type","application/json");
+
+    const options = {
+        body : JSON.stringify(nouveauProduit),
+        method : "POST",
+        headers : headers
+    };
+
+    // Je fais une requete HTTP
+    fetch("http://localhost:3000",options).then(response=>{
+        console.log("Produit ajouté !");
+    });
+}
+```
+
+## Réagir à un formulaire HTML pour ajouter un produit
+
+1. Ajoutez un formulaire html dans votre index.html
+
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+</head>
+<body>
+    <form>
+        <input type="text" name="title" id="">
+        <input type="number" name="price" id="">
+        <input type="submit" value="AJOUTER LE PRODUIT">
+    </form>
+</body>
+<script type="module" src="main.js"></script>
+</html>
+```
+
+2. Ecoutez l'evenement `submit` sur le formulaire
+
+*main.js*
+
+```js
+
+async function main(){
+
+    const formulaire = document.querySelector("form");
+
+    formulaire.addEventListener("submit",(event)=>{
+        event.preventDefault();
+
+        console.log(" RECU!");
+    });
+}
+
+main();
+
+async function addProduct(nouveauProduit){
+    // Je crée mon header
+    const headers = new Headers();
+    headers.append("Content-type","application/json");
+
+    const options = {
+        body : JSON.stringify(nouveauProduit),
+        method : "POST",
+        headers : headers
+    };
+
+    // Je fais une requete HTTP
+    fetch("http://localhost:3000",options).then(response=>{
+        console.log("Produit ajouté !");
+    });
+}
+```
+
+2. A chaque fois que vous cliquez sur AJOUTER UN PRODUIT, la fonction fléchée est executé et le console.log("RECU!") est fait.
+
+Il est temps d'utiliser la fonction `addProduct` quand le formulaire est soumit.
+
+
+3. Récupérer les données du formulaire avec la classe FormData puis passer les données en paramètre de la fonction addProduct pour ajouter un produit à la BDD.
+
+```js
+async function main(){
+
+    const formulaire = document.querySelector("form");
+
+    formulaire.addEventListener("submit",(event)=>{
+        event.preventDefault();
+        const formData = new FormData(formulaire);
+        
+        addProduct({
+            title : formData.get("title"),
+            price : formData.get("price"),
+        });
+
+    });
+}
+
+main();
+
+async function addProduct(nouveauProduit){
+    // Je crée mon header
+    const headers = new Headers();
+    headers.append("Content-type","application/json");
+
+    const options = {
+        body : JSON.stringify(nouveauProduit),
+        method : "POST",
+        headers : headers
+    };
+
+    // Je fais une requete HTTP
+    fetch("http://localhost:3000",options).then(response=>{
+        console.log("Produit ajouté !");
+    });
+}
+```
+
+4. Vérifiez dans PHPMyAdmin si les produit sont ajouté au clic sur le formulaire.
