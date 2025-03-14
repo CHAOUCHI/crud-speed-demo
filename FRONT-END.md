@@ -92,7 +92,7 @@ async function main(){
 main();
 ```
 
-Normalement si vous avez des produits dans la table Product (vérifez dans phpmyadmin) vous devriez avoir un tableau de produit qui s'affiche dans la console.
+Normalement si vous avez des produits dans la table Product (vérifez dans phpmyadmin) vous devriez avoir un tableau de produit qui s'affiche dans la console du navigateur.
 
 > Si la table est vide vous avec un tableau vide `[]`.
 > Ce n'ai pas grâve il suffit de rajouter des produits avec la route `POST /create-product`.
@@ -120,9 +120,67 @@ async function main(){
 main();
 ```
 
-
 ## fetch - POST /create-product : Créer un produit
 
-```js
-fetch()
+Je veux rajouter un produit depuis mon front-end.
+
+Tout à l'heure j'utilisais Postman pour ajouter un produit.
+
+La requete HTTP produite par postman est comme ceci :
+
+```http
+POST localhost:3000/create-product
+Content-type: application/json
+
+{
+    "title" : "Air max",
+    "price" : 39
+}
 ```
+Les informations importantes sont : 
+
+- `POST` : la méthode d'accès HTTP
+- `/create-product` : la route
+- `Content-type : application/json` - En tete (header) http qui indique que nous envoyont du JSON et que express doit donc fabrique l'objet `req.body`.
+- Le body JSON :
+```json
+{
+    "title" : "Air max",
+    "price" : 39
+}
+```
+
+je dois donc préciser ces informations à `fetch()`.
+
+*main.js*
+```js
+
+async function main(){
+
+    const nouveauProduit = {
+        title : "Airmax",
+        price : 60
+    };
+
+
+    // Je crée mon header
+    const headers = new Headers();
+    headers.append("Content-type","application/json");
+
+    const options = {
+        body : JSON.stringify(nouveauProduit),
+        method : "POST",
+        headers : headers
+    };
+
+    // Je fais une requete HTTP
+    fetch("http://localhost:3000",options).then(response=>{
+        console.log("Produit ajouté !");
+    });
+}
+
+main();
+```
+
+## Encapsuler addProduct
+
