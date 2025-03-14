@@ -24,6 +24,13 @@ Installez nodejs et npm sur votre machine si vous ne l'avez pas déjà fait.
 sudo apt install nodejs npm
 ```
 
+- Postman pour tester notre api rest
+```bash
+sudo apt install snap
+sudo snap install postman
+snap run postman
+```
+
 ## Créer la BDD
 Pour créer un crud il nous faut une base de données pour stocker les données. 
 
