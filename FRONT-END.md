@@ -97,6 +97,28 @@ Normalement si vous avez des produits dans la table Product (vérifez dans phpmy
 > Si la table est vide vous avec un tableau vide `[]`.
 > Ce n'ai pas grâve il suffit de rajouter des produits avec la route `POST /create-product`.
 
+Je peux même me servir des produits pour les afficher dans la page.
+
+*main.js*
+```js
+
+async function main(){
+    // Je fais une requete HTTP
+    const response = await fetch("http://localhost:3000");
+
+    // Je converti le body JSON de la réponse en un tableau de produit (le même que j'ai envoyé dans le back)
+    const products = await response.json();
+
+    // Je m'en sert, ici je l'affiche dans la console.
+    products.forEach(product=>{
+        const titleP = document.createElement("p");
+        titleP.innerText = product.title;
+        document.body.appendChild(titleP);
+    })
+}
+
+main();
+```
 
 
 ## fetch - POST /create-product : Créer un produit
