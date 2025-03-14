@@ -80,7 +80,7 @@ La fonction `fetch()` est faite pour ça.
 
 async function main(){
     // Je fais une requete HTTP
-    const response = await fetch("http://localhost:3000");
+    const response = await fetch("http://localhost/all-product");
 
     // Je converti le body JSON de la réponse en un tableau de produit (le même que j'ai envoyé dans le back)
     const products = await response.json();
@@ -104,7 +104,7 @@ Je peux même me servir des produits pour les afficher dans la page.
 
 async function main(){
     // Je fais une requete HTTP
-    const response = await fetch("http://localhost:3000");
+    const response = await fetch("http://localhost:3000/all-product");
 
     // Je converti le body JSON de la réponse en un tableau de produit (le même que j'ai envoyé dans le back)
     const products = await response.json();
@@ -174,7 +174,7 @@ async function main(){
     };
 
     // Je fais une requete HTTP
-    fetch("http://localhost:3000",options).then(response=>{
+    fetch("http://localhost:3000/create-product",options).then(response=>{
         console.log("Produit ajouté !");
     });
 }
@@ -213,7 +213,7 @@ async function addProduct(nouveauProduit){
     };
 
     // Je fais une requete HTTP
-    fetch("http://localhost:3000",options).then(response=>{
+    fetch("http://localhost:3000/create-product",options).then(response=>{
         console.log("Produit ajouté !");
     });
 }
@@ -273,7 +273,7 @@ async function addProduct(nouveauProduit){
     };
 
     // Je fais une requete HTTP
-    fetch("http://localhost:3000",options).then(response=>{
+    fetch("http://localhost:3000/create-product",options).then(response=>{
         console.log("Produit ajouté !");
     });
 }
@@ -317,7 +317,7 @@ async function addProduct(nouveauProduit){
     };
 
     // Je fais une requete HTTP
-    fetch("http://localhost:3000",options).then(response=>{
+    fetch("http://localhost/create-product",options).then(response=>{
         console.log("Produit ajouté !");
     });
 }
